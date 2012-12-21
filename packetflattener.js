@@ -45,13 +45,11 @@
 	}
 
 	function unflattenData(array, template, data, templateKey, dataKey, idx) {
-		console.log(templateKey + " = " + typeof(template[templateKey]));
 		if (typeof(template[templateKey]) == "number" || typeof(template[templateKey]) == "string" || typeof(template[templateKey]) == "boolean") {
 			data[dataKey] = array[idx++];
 		}
 		else if (typeof(template[templateKey]) == "object") {
 			if (template[templateKey] instanceof Array) {
-				console.log(templateKey + " = array");
 				var n = array[idx++];
 				data[dataKey] = new Array();
 				data[dataKey].length = n;
@@ -60,10 +58,8 @@
 				}
 			}
 			else if (template[templateKey].constructor && template[templateKey].constructor === Object) {
-				console.log(templateKey + " = object");
 				data[dataKey] = {};
 				for (var key in template[templateKey]) {
-					console.log("add key " + key);
 					idx = arguments.callee(array, template[templateKey], data[dataKey], key, key, idx);
 				}
 			}
